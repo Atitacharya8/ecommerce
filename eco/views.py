@@ -1,9 +1,15 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from eco.forms import ReviewForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from eco.forms import ReviewForm, SigninForm, SignupForm
 from eco.models import Product, Category
+from eco.serializer import ProductSerializer
 
 
 def home(req):
@@ -14,12 +20,12 @@ def home(req):
 
 
 def search(req):
-    q = req.get["q"]
+    q = req.GET["q"]
     products = Product.objects.filter(active=True, name__icontains=q)
     categories = Category.objects.filter(active=True)
     context = {'products': products,
                'categories': categories,
-               'title': q + "-search"}
+               'title': q + " - search"}
     return render(req, "eco/list.html", context)
 
 
@@ -53,6 +59,45 @@ def detail(req, slug):
     return render(req, "eco/detail.html", context)
 
 
+def signup(req):
+    if req.method=="POST":
+        form=SignupForm(req.POST)
+        if form.is_valid():
+            user=form.save(commit=False)
+            user.save()
+            messages.success(req,"User saved")
+            return redirect("eco:signin")
+        else:
+            messages.error(req,"Error in form")
+    else:
+        form=SigninForm()
+    context={"form":form}
+    return render(req,"eco/signup.html",context)
+
+
+def signin(req):
+    if req.method == "POST":
+        form = SigninForm(req.POST)
+        username = form["username"].value()
+        password = form["password"].value()
+        user = authenticate(req, username=username, password=password)
+        if user is not None:
+            login(req, user)
+            messages.success(req, "Successfully logged in")
+            return redirect("eco:home")
+        else:
+            messages.error(req, "Invalid Username or Password")
+    else:
+        form = SigninForm()
+    context = {"form": form}
+    return render(req, "eco/signin.html", context)
+
+
+def signout(req):
+    logout(req)
+    return redirect("shop:signin")
+
+
 def cart(req, slug):
     product = Product.objects.get(slug=slug)
     initial = {"items": [], "price": 0.0, "count": 0}
@@ -81,3 +126,11 @@ def mycart(req):
 def checkout(req):
     req.session.pop('data', None)
     return redirect("/")
+
+
+@api_view(['GET'])
+def api_products(req):
+    query=req.GET.get("q","")
+    products=Product.objects.filter(Q(name__contains=query) | Q(description__contains=query))
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
