@@ -33,22 +33,23 @@ def categories(req, slug):
 
 def detail(req, slug):
     product = Product.objects.get(active=True, slug=slug)
-    if req.method=="post":
-        form=ReviewForm(req.post)
+    if req.method == "POST":
+        form = ReviewForm(req.POST)
         if form.is_valid():
-            review=form.save(commit=False)
-            review.product=product
-            review.user=req.user
+            review = form.save(commit=False)
+            review.product = product
+            review.user = req.user
             review.save()
-            messages.success(req,"Review saved")
+            messages.success(req, "Review saved")
         else:
-            messages.error(req,"Invalid form")
+            messages.error(req, "Invalid form")
     else:
-        form=ReviewForm()
+        form = ReviewForm()
+
     categories = Category.objects.filter(active=True)
     context = {"product": product,
                "categories": categories,
-               "form":form}
+               "form": form}
     return render(req, "eco/detail.html", context)
 
 
