@@ -9,7 +9,12 @@ from rest_framework.response import Response
 
 from eco.forms import ReviewForm, SigninForm, SignupForm
 from eco.models import Product, Category
+
 from eco.serializer import ProductSerializer
+
+
+def about(req):
+    return render(req,"eco/about.html")
 
 
 def home(req):
@@ -60,19 +65,19 @@ def detail(req, slug):
 
 
 def signup(req):
-    if req.method=="POST":
-        form=SignupForm(req.POST)
+    if req.method == "POST":
+        form = SignupForm(req.POST)
         if form.is_valid():
-            user=form.save(commit=False)
+            user = form.save(commit=False)
             user.save()
-            messages.success(req,"User saved")
+            messages.success(req, "User saved")
             return redirect("eco:signin")
         else:
-            messages.error(req,"Error in form")
+            messages.error(req, "Error in form")
     else:
-        form=SigninForm()
-    context={"form":form}
-    return render(req,"eco/signup.html",context)
+        form = SigninForm()
+    context = {"form": form}
+    return render(req, "eco/signup.html", context)
 
 
 def signin(req):
@@ -95,7 +100,7 @@ def signin(req):
 
 def signout(req):
     logout(req)
-    return redirect("shop:signin")
+    return redirect("eco:signin")
 
 
 def cart(req, slug):
@@ -114,8 +119,8 @@ def cart(req, slug):
 
 
 def mycart(req):
-    sess = req.session.get("data", {"items": []})
-    products = Product.objects.filter(active=True, slug__in=["items"])
+    sess1 = req.session.get("data", {"items": []})
+    products = Product.objects.filter(active=True, slug__in=sess1["items"])
     categories = Category.objects.filter(active=True)
     context = {"products": products,
                "categories": categories,
@@ -130,7 +135,7 @@ def checkout(req):
 
 @api_view(['GET'])
 def api_products(req):
-    query=req.GET.get("q","")
-    products=Product.objects.filter(Q(name__contains=query) | Q(description__contains=query))
+    query = req.GET.get("q", "")
+    products = Product.objects.filter(Q(name__contains=query) | Q(description__contains=query))
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)

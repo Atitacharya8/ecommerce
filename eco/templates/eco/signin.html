@@ -13,17 +13,21 @@
                     Login to eCommerce Shop
                 </div>
                 <div class="card-body">
+
                     <form action="" method="post">
                         {% csrf_token %}
                         {% for field in form %}
                             {% bootstrap_field field %}
                         {% endfor %}
                         <input type="submit" class="btn btn-success text-center w-100 mb-3" value="Sign In">
-                        <a href="{% url "eco:signup" %}" class="small">Sign Up</a>
-                        <a href="/" class="float-right small">Home</a>
                     </form>
                 </div>
+                <div class="card-footer text-center">
+                   <a href="{% url "eco:signup" %}" class="float-left small">Sign Up</a>
+
+                        <a href="/" class="float-right small">Home</a>
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -6,6 +6,7 @@ from eco import views
 app_name = "eco"
 
 urlpatterns = [
+    path('about/',views.about,name='about'),
     path('home/', views.home, name="home"),
     path('', views.signup, name="signup"),
     path('signin/', views.signin, name="signin"),
@@ -17,5 +18,7 @@ urlpatterns = [
     path('<slug>/', views.detail, name="detail"),
     path('categories/<slug>/', views.categories, name="categories"),
     path('api/products/', views.api_products, name="api_products"),
+    # path('<slug>/wishlist/', views.wishlist, name='wishlist'),
+    # path('mywishlist/', views.mywishlist, name='mywishlist'),
 
 ]
