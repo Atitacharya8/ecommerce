@@ -1,0 +1,33 @@
+{#{% extends "eco/base.html" %}#}
+{#{% block title %}Continue to GoogleLogIn{% endblock %}#}
+{#{% block content %}#}
+{% load static %}
+<html>
+<head>
+ <link href="{% static "eco/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "eco/css/eco-homepage.css" %}" rel="stylesheet">
+    </head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container bg-light h-50 w-50">
+    <div class="card-header text-center">
+    <h4>Login Successful</h4>
+    </div>
+
+    <div class="card-body text-center">
+        <div class="media-body">
+            <h2 class="account-heading"> Welcome: to our Ecommerce Site</h2>
+            <p class="text-secondary">For Further details please continue.</p>
+        </div>
+    </div>
+    <div class="card-footer text-center ">
+    <div class="btn btn-outline-danger">
+        <a href="{% url 'eco:home' %}">Cotinue</a>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+{#{% endblock %}#}

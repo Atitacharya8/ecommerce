@@ -40,9 +40,6 @@ INSTALLED_APPS = [
     'eco',
     'bootstrap4',
     'rest_framework',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'social_django',
 
 ]

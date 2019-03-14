@@ -64,7 +64,8 @@ def detail(req, slug):
     return render(req, "eco/detail.html", context)
 
 
-
+def profile(req):
+    return render(req,"eco/profile.html")
 
 
 def signup(req):
