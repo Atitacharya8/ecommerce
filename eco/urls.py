@@ -18,7 +18,6 @@ urlpatterns = [
     path('<slug>/', views.detail, name="detail"),
     path('categories/<slug>/', views.categories, name="categories"),
     path('api/products/', views.api_products, name="api_products"),
-    # path('<slug>/wishlist/', views.wishlist, name='wishlist'),
-    # path('mywishlist/', views.mywishlist, name='mywishlist'),
+
 
 ]

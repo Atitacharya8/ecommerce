@@ -64,6 +64,9 @@ def detail(req, slug):
     return render(req, "eco/detail.html", context)
 
 
+
+
+
 def signup(req):
     if req.method == "POST":
         form = SignupForm(req.POST)

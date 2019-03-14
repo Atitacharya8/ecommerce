@@ -16,10 +16,11 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static "eco/css/eco-homepage.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-top height=200 width=100">
+<nav class="navbar navbar-expand-lg navbar-default bg-secondary fixed-top height=200 width=100 responsive">
     <div class="container">
         <a class="navbar-brand" href="{% url "eco:home" %}"><img src="logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -67,7 +68,7 @@
 </nav>
 
 
-<div class="container bg-success">
+<div class="container-fluid bg-success">
 
     <div class="row">
 

@@ -23,9 +23,10 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                   <a href="{% url "eco:signup" %}" class="float-left small">Sign Up</a>
-
-                        <a href="/" class="float-right small">Home</a>
+                    <a href="{% url "eco:signup" %}" class="float-left small">Sign Up</a>
+                    <a href='{% url 'social:begin' 'google-oauth2' %}'>Login with Google</a>
+                    <a href="/" class="float-right small">Home</a>
+                </div>
             </div>
         </div>
     </div>
