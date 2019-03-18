@@ -14,7 +14,7 @@ from eco.serializer import ProductSerializer
 
 
 def about(req):
-    return render(req,"eco/about.html")
+    return render(req, "eco/about.html")
 
 
 def home(req):
@@ -32,6 +32,10 @@ def search(req):
                'categories': categories,
                'title': q + " - search"}
     return render(req, "eco/list.html", context)
+
+
+def googlemap(req):
+    return render(req, "eco/map.html", {})
 
 
 def categories(req, slug):
@@ -65,7 +69,7 @@ def detail(req, slug):
 
 
 def profile(req):
-    return render(req,"eco/profile.html")
+    return render(req, "eco/profile.html")
 
 
 def signup(req):

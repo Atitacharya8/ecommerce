@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "eco:about"  %}">About</a>
+                    <a class="nav-link" href="{% url "eco:about" %}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "eco:api_products" %}">APIs</a>
@@ -50,7 +50,7 @@
                             <a class="dropdown-item" href="{% url "eco:signin" %}">SignIn</a>
                             <a class="dropdown-item" href="{% url "eco:signup" %}">SignUp</a>
                         {% endif %}
-                    <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url "eco:checkout" %}">Checkout</a>
 
                     </div>
@@ -213,6 +213,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-secondary">
     <div class="container">
+        <p class="text-center"><a href="{% url 'eco:googlemap' %}">Google Map for location</a></p>
         <p class="m-0 text-center text-white">Copyright &copy; Ecommerce Shop 2018</p>
     </div>
     <!-- /.container -->
