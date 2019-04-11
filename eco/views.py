@@ -14,7 +14,30 @@ from eco.serializer import ProductSerializer
 
 
 def AtitAdmin(req):
-    return render(req, "eco/AtitAdmin.html")
+    if req.method == "POST":
+        form = SigninForm(req.POST)
+        username = form["username"].value()
+        password = form["password"].value()
+        user = authenticate(req, username=username, password=password)
+        if user is not None:
+            login(req, user)
+            messages.success(req, "Successfully logged in")
+            return render(req, "eco/AtitAdmin.html")
+        else:
+            messages.error(req, "Invalid Username or Password")
+    else:
+        form = SigninForm()
+    context = {"form": form}
+    return render(req, "eco/signinAdmin.html", context)
+
+
+def category(req):
+    return render(req, "eco/category.html")
+
+
+def product(req):
+    return render(req, "eco/product.html")
+
 
 def about(req):
     return render(req, "eco/about.html")
@@ -63,7 +86,6 @@ def detail(req, slug):
             messages.error(req, "Invalid form")
     else:
         form = ReviewForm()
-
     categories = Category.objects.filter(active=True)
     context = {"product": product,
                "categories": categories,
@@ -142,6 +164,22 @@ def mycart(req):
 def checkout(req):
     req.session.pop('data', None)
     return redirect("/")
+
+
+def comments(req):
+    # if req.method == "POST":
+    #     form = ReviewForm(req.POST)
+    #     if form.is_valid():
+    #         review = form.save(commit=False)
+    #         review.user = req.user
+    #         review.save()
+    #         messages.success(req, "Feedback saved")
+    #     else:
+    #         messages.error(req, "Invalid form")
+    # else:
+    #     form = ReviewForm()
+    # context={'form': form}
+    return render(req, "eco/comments.html")
 
 
 @api_view(['GET'])

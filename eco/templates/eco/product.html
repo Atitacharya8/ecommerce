@@ -1,0 +1,29 @@
+<{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery="slim" %}
+
+<title>{% block title %}Product Page{% endblock %}</title>
+
+<div class="container">
+    {% bootstrap_messages %}
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 col-sm-10 offset-sm-1">
+            <div class="card my-5">
+                <div class="card-header text-center">
+                    Product Page
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-success text-center w-100 mb-3" href="{% url "eco:product" %}">Create Product</a>
+                    <a class="btn btn-success text-center w-100 mb-3" href="{% url "eco:product" %}">Update Product</a>
+                    <a class="btn btn-success text-center w-100 mb-3" href="{% url "eco:product" %}">Delete Product</a>
+
+                </div>
+                 <div class="card-footer text-center">
+                     <a class="btn btn-success text-center" href="{% url "eco:AtitAdmin" %}">Back to Admin</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

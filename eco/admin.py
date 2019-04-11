@@ -15,3 +15,5 @@ class ProductAdmin(ImportExportModelAdmin):
 
 class ReviewAdmin(ImportExportModelAdmin):
     pass
+
+

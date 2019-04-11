@@ -7,6 +7,8 @@ app_name = "eco"
 
 urlpatterns = [
     path('AtitAdmin/',views.AtitAdmin,name="AtitAdmin"),
+    path('category/', views.category, name="category"),
+    path('product/', views.product, name="product"),
     path('accounts/profile/',views.profile,name="profile"),
     path('about/',views.about,name='about'),
     path('home/', views.home, name="home"),
@@ -21,6 +23,7 @@ urlpatterns = [
     path('<slug>/', views.detail, name="detail"),
     path('categories/<slug>/', views.categories, name="categories"),
     path('api/products/', views.api_products, name="api_products"),
+    path('comments/',views.comments,name="comments"),
 
 
 
