@@ -13,6 +13,9 @@ from eco.models import Product, Category
 from eco.serializer import ProductSerializer
 
 
+def AtitAdmin(req):
+    return render(req, "eco/AtitAdmin.html")
+
 def about(req):
     return render(req, "eco/about.html")
 
