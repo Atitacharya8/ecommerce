@@ -11,6 +11,11 @@ class ReviewForm(forms.ModelForm):
         fields=["rate","review"]
         model=models.Review
 
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        fields=["rate","feedback"]
+        model=models.Feedback
+
 
 class SigninForm(forms.Form):
     username=forms.CharField()

@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from eco.forms import ReviewForm, SigninForm, SignupForm
+from eco.forms import ReviewForm, SigninForm, SignupForm, FeedbackForm
 from eco.models import Product, Category
 
 from eco.serializer import ProductSerializer
@@ -166,20 +166,20 @@ def checkout(req):
     return redirect("/")
 
 
-def comments(req):
-    # if req.method == "POST":
-    #     form = ReviewForm(req.POST)
-    #     if form.is_valid():
-    #         review = form.save(commit=False)
-    #         review.user = req.user
-    #         review.save()
-    #         messages.success(req, "Feedback saved")
-    #     else:
-    #         messages.error(req, "Invalid form")
-    # else:
-    #     form = ReviewForm()
-    # context={'form': form}
-    return render(req, "eco/comments.html")
+def feedback(req):
+    if req.method == "POST":
+        form = FeedbackForm(req.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.user = req.user
+            feedback.save()
+            messages.success(req, "Feedback saved")
+        else:
+            messages.error(req, "Invalid form")
+    else:
+        form = FeedbackForm()
+    context={'form': form}
+    return render(req, "eco/feedback.html",context)
 
 
 @api_view(['GET'])

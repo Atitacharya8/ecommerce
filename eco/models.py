@@ -50,4 +50,14 @@ class Review(models.Model):
         return self.review
 
 
+class Feedback(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    rate=models.IntegerField(default=10,validators=[MaxValueValidator(10),MinValueValidator(1)])
+    feedback=models.TextField(blank=True)
+    created=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.feedback
+
+
 
