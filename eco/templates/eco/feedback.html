@@ -7,15 +7,15 @@
 
 
     <h5 class="vTextField text-light">Please give a feedback for the refinement of our website.</h5>
-        {% for item in feedback_set.all %}
+        {% for items in feedback.feedback_set.all %}
             <div class="card mb-3 w-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ rate }} star{{ item.rate|pluralize }}</h5>
-                    <p class="card-text">{{ item.feedback }}</p>
-                    <p class="card-text">By : {{ item.user.username }}</p>
+                    <h5 class="card-title">{{ rate }} star{{ items.rate|pluralize }}</h5>
+                    <p class="card-text">{{ items.feedback }}</p>
+                    <p class="card-text">By : {{ items.user.username }}</p>
                 </div>
                 <div class="card-footer text-muted">
-                    {{ item.created|timesince }} ago
+                    {{ items.created|timesince }} ago
                 </div>
             </div>
         {% endfor %}

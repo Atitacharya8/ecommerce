@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from eco.forms import ReviewForm, SigninForm, SignupForm, FeedbackForm
+from eco.forms import ReviewForm, SigninForm, SignupForm, FeedbackForm, ProductForm, CategoryForm
 from eco.models import Product, Category
 
 from eco.serializer import ProductSerializer
@@ -178,8 +178,51 @@ def feedback(req):
             messages.error(req, "Invalid form")
     else:
         form = FeedbackForm()
-    context={'form': form}
-    return render(req, "eco/feedback.html",context)
+    context = {'form': form}
+    return render(req, "eco/feedback.html", context)
+
+
+def category_create_view(req):
+    form = CategoryForm(req.POST or None)
+    if form.is_valid():
+        form.save()
+    context = {'form': form}
+    return render(req, "eco/category_create.html", context)
+
+
+def category_update_view(req,slug):
+    category = Category.objects.all(slug=slug)
+    form = CategoryForm(req.POST)
+    if form.is_valid():
+        form.save()
+    context = {'category': category, 'form': form}
+    return render(req, "eco/category_update.html", context)
+
+
+def category_delete_view(req):
+    pass
+
+
+def product_create_view(req):
+    form = ProductForm(req.POST or None)
+    if form.is_valid():
+        form.save()
+    context = {'form': form}
+    return render(req, "eco/product_create.html", context)
+
+
+def product_delete_view(req):
+    pass
+
+
+def product_update_view(req,slug):
+    product=Product.objects.all(slug=slug)
+    form = ProductForm(req.POST or None)
+    if form.is_valid():
+        form.save()
+    context = {'form': form}
+    return render(req, "eco/product_update.html", context)
+
 
 
 @api_view(['GET'])

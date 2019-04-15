@@ -1,0 +1,11 @@
+{% extends 'eco/base.html' %}
+{% block content %}
+    <div class="card-header">Create New Product</div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="card-footer text-center"> <input class="btn-block" type="submit" value="Save"/></div>
+        </form>
+    </div>
+{% endblock %}
