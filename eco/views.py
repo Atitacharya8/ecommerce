@@ -186,44 +186,71 @@ def category_create_view(req):
     form = CategoryForm(req.POST or None)
     if form.is_valid():
         form.save()
+        return redirect('eco:home')
     context = {'form': form}
     return render(req, "eco/category_create.html", context)
 
 
 def category_update_view(req,slug):
-    category = Category.objects.all(slug=slug)
-    form = CategoryForm(req.POST)
+    category = Category.objects.get(slug=slug)
+    form = CategoryForm(req.POST or None,instance=category)
     if form.is_valid():
         form.save()
     context = {'category': category, 'form': form}
     return render(req, "eco/category_update.html", context)
 
 
-def category_delete_view(req):
-    pass
+def category_delete_view(req,slug):
+    category = Category.objects.get(slug=slug)
+    if req.method == 'POST':
+        category.delete()
+        return redirect('eco:category_list_delete')
+
+    return render(req, "eco/product_delete.html", {'category': category})
+
+def category_list_update(req):
+    category=Category.objects.all()
+    return render(req,"eco/category_list_update.html",{'category':category})
+
+def category_list_delete(req):
+    category = Category.objects.all()
+    return render(req,"eco/category_list_delete.html",{'category':category})
 
 
 def product_create_view(req):
     form = ProductForm(req.POST or None)
     if form.is_valid():
         form.save()
+        return redirect("eco:home")
     context = {'form': form}
     return render(req, "eco/product_create.html", context)
 
 
-def product_delete_view(req):
-    pass
+def product_delete_view(req,slug):
+    products = Product.objects.get(slug=slug)
+    if req.method=='POST':
+        products.delete()
+        return redirect('eco:product_list_delete')
+
+    return render(req, "eco/product_delete.html",{'products':products})
 
 
 def product_update_view(req,slug):
-    product=Product.objects.all(slug=slug)
-    form = ProductForm(req.POST or None)
+    products = Product.objects.get(slug=slug)
+    form = ProductForm(req.POST or None,instance=products)
     if form.is_valid():
         form.save()
-    context = {'form': form}
+    context = {'products': products, 'form': form}
     return render(req, "eco/product_update.html", context)
 
 
+def product_list_update(req):
+    products=Product.objects.all()
+    return render(req,"eco/product_list_update.html",{'products':products})
+
+def product_list_delete(req):
+    products = Product.objects.all()
+    return render(req,"eco/product_list_delete.html",{'products':products})
 
 @api_view(['GET'])
 def api_products(req):

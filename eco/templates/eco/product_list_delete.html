@@ -1,0 +1,20 @@
+{% extends "eco/base.html" %}
+{% block content %}
+
+    {% for item in products %}
+        <div class="container">
+            <div class="card-title m-2">
+                {% if products %}
+                <ul>
+                    <li><h5>{{ item.name|title }}</h5>:-<a class="btn-danger" href="{% url "eco:product_delete" item.slug %}">Delete</a>
+                    </li>
+                </ul>
+                <br>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+    {% endfor %}
+{% endblock %}

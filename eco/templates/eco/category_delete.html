@@ -1,0 +1,20 @@
+{% extends "eco/base.html" %}
+{% block content %}
+    <div class="card">
+        <div class="row">
+            <div class="col-5">
+                <div class="card-header bg-warning">Delete category {{ category.name }}</div>
+                <div class="card-body">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2>Are you sure you want to remove {{ category.name }}?</h2>
+                        <button class="btn-warning">Delete</button>
+                        <a class="btn-danger" href="{% url "eco:category_list_delete" %}">Cancel</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

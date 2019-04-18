@@ -1,15 +1,19 @@
 {% extends "eco/base.html" %}
 {% block content %}
-{#    {% for item in category %}#}
-{#                    <a href="{% url "eco:category_update" item.slug %}" class="list-group-item">{{ item.name }}</a>#}
+    <div class="card">
+    <div class="row">
+    <div class="col-5">
+        <div  class="card-header bg-light">Upate category <b>{{ category.name  }}</b></div>
+<div class="card-body">
 
-{#        {% endfor %}#}
-    <div class="card-body">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <div class="card-footer"><button>Submit</button></div>
-    </form>
+<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+    <button>Update</button>
+
+		</form>
+</div>
     </div>
-
+    </div>
+    </div>
 {% endblock %}
