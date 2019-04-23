@@ -20,6 +20,7 @@
                             {% bootstrap_field field %}
                         {% endfor %}
                         <input type="submit" class="btn btn-success text-center w-100 mb-3" value="Sign In">
+                         <a href="{% url "eco:password_reset" %}">Forget your password?</a>
                     </form>
                 </div>
                 <div class="card-footer text-center">
