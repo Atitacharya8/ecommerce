@@ -24,7 +24,7 @@ SECRET_KEY = 'tue2a_b+i-bd5^fu2g2semao-85++4zqwwo9fkj%+^t7-6wh1k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost","https://atitacharya8.github.io/ecommerce/","127.0.0.1"]
 
 # Application definition
 
